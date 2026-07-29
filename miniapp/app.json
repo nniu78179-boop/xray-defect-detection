@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/monitor/monitor",
+    "pages/result/result"
+  ],
+  "window": {
+    "navigationBarTitleText": "X光缺陷检测",
+    "navigationBarBackgroundColor": "#1e293b",
+    "navigationBarTextStyle": "white"
+  },
+  "permission": {
+    "scope.camera": {
+      "desc": "需要相机拍摄X光片"
+    }
+  }
+}

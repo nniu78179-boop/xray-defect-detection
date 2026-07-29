@@ -1,0 +1,36 @@
+<view class="container">
+  <view class="header">
+    <image class="logo" src="/images/logo.jpg" mode="aspectFit"/>
+    <text class="title">X光缺陷检测</text>
+    <text class="subtitle">拍照或上传X光片，AI自动识别缺陷</text>
+  </view>
+
+  <view class="cards">
+    <view class="card" bindtap="onTakePhoto">
+      <view class="card-icon">📷</view>
+      <text class="card-title">拍照检测</text>
+      <text class="card-desc">使用相机拍摄X光片</text>
+    </view>
+
+    <view class="card" bindtap="onChooseFromAlbum">
+      <view class="card-icon">🖼</view>
+      <text class="card-title">相册选取</text>
+      <text class="card-desc">从相册中选择图片</text>
+    </view>
+
+    <view class="card" bindtap="onGoMonitor">
+      <view class="card-icon">🔌</view>
+      <text class="card-title">机器自动检测</text>
+      <text class="card-desc">监控文件夹，X光机传图自动检测</text>
+    </view>
+  </view>
+
+  <view class="loading-overlay" wx:if="{{loading}}">
+    <view class="loading-box">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">
+        {{statusText === 'compressing' ? '压缩中...' : '上传并推理中...'}}
+      </text>
+    </view>
+  </view>
+</view>

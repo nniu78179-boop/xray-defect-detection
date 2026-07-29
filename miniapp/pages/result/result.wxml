@@ -1,0 +1,54 @@
+<view class="container">
+  <image class="logo" src="/images/logo.jpg" mode="aspectFit"/>
+  <view class="summary-bar">
+    <view class="summary-item">
+      <text class="summary-value">{{defectCount}}</text>
+      <text class="summary-label">缺陷数</text>
+    </view>
+    <view class="summary-item">
+      <text class="summary-value">{{inferenceTimeMs}}ms</text>
+      <text class="summary-label">推理耗时</text>
+    </view>
+    <view class="summary-item">
+      <text class="summary-value">{{filename}}</text>
+      <text class="summary-label">文件名</text>
+    </view>
+  </view>
+
+  <view class="image-section">
+    <view class="section-row">
+      <text class="section-title">检测结果图</text>
+      <view class="toggle-row" bindtap="onToggle">
+        <text class="toggle-label">标注框</text>
+        <view class="toggle-switch {{showAnnotated ? '' : 'off'}}">
+          <view class="toggle-knob"></view>
+        </view>
+      </view>
+    </view>
+    <image class="result-image" src="{{imagePath}}" mode="widthFix" wx:if="{{imagePath}}"/>
+    <view class="no-image" wx:else>
+      <text>未能加载图像</text>
+    </view>
+  </view>
+
+  <view class="detection-section">
+    <text class="section-title">缺陷列表</text>
+    <view class="detection-list" wx:if="{{detections.length > 0}}">
+      <view class="detection-row" wx:for="{{detections}}" wx:key="index">
+        <view class="detection-info">
+          <text class="detection-class">{{item.class_name}}</text>
+          <text class="detection-box">[{{item.x1}},{{item.y1}},{{item.x2}},{{item.y2}}]</text>
+        </view>
+        <view class="confidence-bar-wrap">
+          <view class="confidence-bar" style="width: {{item.barWidth}}%; background: {{item.barColor}}"></view>
+        </view>
+        <text class="confidence-text">{{item.barWidth}}%</text>
+      </view>
+    </view>
+    <view class="no-defects" wx:else>
+      <text class="no-defects-text">未检出缺陷</text>
+    </view>
+  </view>
+
+  <button class="back-btn" bindtap="onBack">返回</button>
+</view>

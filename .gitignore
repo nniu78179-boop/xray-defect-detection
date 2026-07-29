@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.spec
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Large model files (use Git LFS or separate download)
+*.pt
+*.pth
+*.onnx
+*.tar.gz
+
+# Large distributable
+*.exe
+
+# Data directories (may contain sensitive images)
+input/*
+output/*
+save/*
+!input/.gitkeep
+!output/.gitkeep
+!save/.gitkeep
+
+# Logs
+*.log
+startup_error.log
+
+# Temporary files
+*.tmp
+*.temp
+.test/
+.test
+
+# OS files
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Sensitive config
+*.processed.json
+.results.json
+
+# Miniapp specific
+miniapp/.git/
+
+# Logo files (keep local only)
+**/logo.jpg
+**/logo.png

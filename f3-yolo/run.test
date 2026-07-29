@@ -1,0 +1,1 @@
+set KMP_DUPLICATE_LIB_OK=TRUE ; ..\.venv\Scripts\python.exe -m streamlit run app.py

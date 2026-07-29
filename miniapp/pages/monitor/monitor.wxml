@@ -1,0 +1,71 @@
+<view class="container">
+  <view class="top-bar">
+    <image class="logo" src="/images/logo.jpg" mode="aspectFit"/>
+    <view class="status-row">
+      <view class="dot {{connected ? 'ok' : 'off'}}"></view>
+      <text class="status-text">{{connected ? '监控中' : '未连接'}}</text>
+      <text class="check-text">上次检查: {{lastCheck}}</text>
+    </view>
+    <text class="hint">X光机拍片后自动检测，每1秒刷新</text>
+  </view>
+
+  <view wx:if="{{!hasResult}}" class="empty">
+    <text class="empty-icon">📂</text>
+    <text class="empty-title">等待机器传图</text>
+    <text class="empty-desc">等待X光机拍片...<br/>每次拍片后约2-3秒自动显示结果</text>
+  </view>
+
+  <view wx:else>
+    <view class="summary-bar">
+      <view class="summary-item">
+        <text class="summary-value">{{defectCount}}</text>
+        <text class="summary-label">缺陷数</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-value">{{inferenceTimeMs}}ms</text>
+        <text class="summary-label">推理耗时</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-value">{{detectTime}}</text>
+        <text class="summary-label">检测时间</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-value">{{filename}}</text>
+        <text class="summary-label">文件</text>
+      </view>
+    </view>
+
+    <view class="image-section">
+      <view class="section-row">
+        <text class="section-title">检测结果图</text>
+        <view class="toggle-row" bindtap="onToggle">
+          <text class="toggle-label">标注框</text>
+          <view class="toggle-switch {{showAnnotated ? '' : 'off'}}">
+            <view class="toggle-knob"></view>
+          </view>
+        </view>
+      </view>
+      <image class="result-image" src="{{imagePath}}" mode="widthFix" wx:if="{{imagePath}}"/>
+      <view class="no-image" wx:else><text>加载中...</text></view>
+    </view>
+
+    <view class="detection-section">
+      <text class="section-title">缺陷列表</text>
+      <view class="detection-list" wx:if="{{detections.length > 0}}">
+        <view class="detection-row" wx:for="{{detections}}" wx:key="index">
+          <view class="detection-info">
+            <text class="detection-class">{{item.class_name}}</text>
+            <text class="detection-box">[{{item.x1}},{{item.y1}},{{item.x2}},{{item.y2}}]</text>
+          </view>
+          <view class="conf-bar-wrap">
+            <view class="conf-bar" style="width: {{item.barWidth}}%; background: {{item.barColor}}"></view>
+          </view>
+          <text class="conf-text">{{item.barWidth}}%</text>
+        </view>
+      </view>
+      <view class="no-defects" wx:else>
+        <text class="no-defects-text">未检出缺陷</text>
+      </view>
+    </view>
+  </view>
+</view>
